@@ -34,6 +34,15 @@ from app.security import hash_password, verify_password
 from app.seed import ME_CURRICULUM, seed_data
 from app.services import get_clo_report, get_course_report, get_plo_summary, get_program_report, normalized_mapping_weight
 
+import os
+from flask import Flask
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
+app = Flask(__name__, 
+            template_folder=os.path.join(base_dir, 'templates'),
+            static_folder=os.path.join(base_dir, 'static'))
+
+
 app = FastAPI(title="OBE PLO Attainment")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
